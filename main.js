@@ -30,15 +30,41 @@ const printStacks = () => {
 }
 
 // Next, what do you think this function should do?
-const movePiece = () => {
+const movePiece = (startStack, endStack) => {
   // Your code here
-
+  let moveRing = stacks[startStack].pop();
+  stacks[endStack].push(moveRing);
 }
 
 // Before you move, should you check if the move it actually allowed? Should 3 be able to be stacked on 2
-const isLegal = () => {
+const isLegal = (startStack, endStack) => {
   // Your code here
 
+  if (startStack == 'a' || startStack == 'b' || startStack == 'c') {
+    if (endStack == 'a' || endStack == 'b' || endStack == 'c') {
+      
+      let startStackIndex = stacks[startStack].length - 1;
+      let moveRing = stacks[startStack][startStackIndex];
+      console.log('startStack:', startStack);
+      console.log('startStackIndex:', startStackIndex);
+      console.log('moveRing:', moveRing);
+      let endStackIndex = stacks[endStack].length;
+      let stackedRing = stacks[endStack][endStackIndex];
+      console.log('stackedRing:', stackedRing)
+
+      if (moveRing > stackedRing) {
+        console.log('Move not allowed.  You can only stack smaller rings on larger rings.')
+      }
+      else {
+      }
+    }
+    else {
+      console.log('Enter "a" or "b" or "c" to select a tower to move a ring to.')
+    }
+  }
+  else {
+    console.log('Enter "a" or "b" or "c" to select a tower to move a ring from.')
+  }
 }
 
 // What is a win in Towers of Hanoi? When should this function run?
@@ -50,7 +76,9 @@ const checkForWin = () => {
 // When is this function called? What should it do with its argument?
 const towersOfHanoi = (startStack, endStack) => {
   // Your code here
-
+  isLegal(startStack, endStack);
+  movePiece(startStack, endStack);
+  checkForWin();
 }
 
 const getPrompt = () => {
